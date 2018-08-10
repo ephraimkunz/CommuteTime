@@ -8,10 +8,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/wcharczuk/go-chart/drawing"
-
 	"github.com/wcharczuk/go-chart"
-
+	"github.com/wcharczuk/go-chart/drawing"
 	"googlemaps.github.io/maps"
 )
 
@@ -21,10 +19,10 @@ func main() {
 		log.Fatal("Fatal error: %s", err)
 	}
 
-	startTime := time.Now()
-	endTime := startTime.Add(120 * time.Hour)
-	home := "East Palo Alto"
-	work := "Cupertino"
+	startTime := roundToNearestHalfHourInFuture()
+	endTime := startTime.Add(6 * time.Hour)
+	home := "1175 Cypress St, East Palo Alto, CA"
+	work := "Apple Park, Cupertino, CA"
 
 	createAndSaveGraph(c, startTime, endTime, "To Work", "to-work.png", home, work)
 	createAndSaveGraph(c, startTime, endTime, "From Work", "from-work.png", work, home)
@@ -74,7 +72,7 @@ func createAndSaveGraph(c *maps.Client, startTime time.Time, endTime time.Time, 
 		}
 
 		wg.Wait()
-		currentTime = currentTime.Add(15 * time.Minute)
+		currentTime = nextTimeInGraph(currentTime)
 	}
 
 	graph := chart.Chart{
@@ -120,6 +118,7 @@ func createAndSaveGraph(c *maps.Client, startTime time.Time, endTime time.Time, 
 				TextRotationDegrees: 90,
 				Show:                true,
 			},
+			Ticks: generateTicks(timestamps),
 		},
 
 		YAxis: chart.YAxis{
@@ -157,18 +156,4 @@ func createAndSaveGraph(c *maps.Client, startTime time.Time, endTime time.Time, 
 	if err != nil {
 		log.Fatalf("Fatal error: %s", err)
 	}
-}
-
-func formatTime(v interface{}) string {
-	dateFormat := "3 PM"
-	if typed, isTyped := v.(time.Time); isTyped {
-		return typed.Format(dateFormat)
-	}
-	if typed, isTyped := v.(int64); isTyped {
-		return time.Unix(0, typed).Format(dateFormat)
-	}
-	if typed, isTyped := v.(float64); isTyped {
-		return time.Unix(0, int64(typed)).Format(dateFormat)
-	}
-	return ""
 }
