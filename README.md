@@ -6,3 +6,10 @@ This is a simple, command-line Go program that generates graphs of possible comm
 
 ## Costs
 Be aware that the price of the Google Distance Matrix API calls used to generate the graphs are high. Each call costs 1 cent, meaning that to generate a 6 hour graph with 15 minute resolution and best, worst and likely outcomes will cost around 72 cents (6 * 4 * 3).
+
+## Alternatives
+If you don't want to set up a whole Go environment on the system where this cron job will run (i.e. Raspberry Pi), here's another way.
+1. Change `commute.sh` by removing the `go build` line.
+2. Cross-compile for the target machine on another machine. For Raspberry Pi, run `env GOOS=linux GOARCH=arm GOARM=5 go build
+`.
+3. Scp this executable and the scripts to the target machine. You should be able to run the scripts there and everything should work.
