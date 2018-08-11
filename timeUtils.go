@@ -60,3 +60,10 @@ func generateTicks(times []time.Time) []chart.Tick {
 
 	return ticks
 }
+
+func timeOfDay(now time.Time, noon time.Time) string {
+	if now.Before(noon) {
+		return "this morning"
+	}
+	return "this afternoon"
+}

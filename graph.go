@@ -13,19 +13,22 @@ import (
 	"googlemaps.github.io/maps"
 )
 
-func main() {
-	c, err := maps.NewClient(maps.WithAPIKey("AIzaSyCL2wxIPmfmMbzzHY1wyQWc88c0nWqR6Bo"))
+func generateGraph(toWork bool) {
+	c, err := maps.NewClient(maps.WithAPIKey(parameters().apiKey))
 	if err != nil {
 		log.Fatal("Fatal error: %s", err)
 	}
 
 	startTime := roundToNearestHalfHourInFuture()
 	endTime := startTime.Add(6 * time.Hour)
-	home := "1175 Cypress St, East Palo Alto, CA"
-	work := "Apple Park, Cupertino, CA"
+	home := parameters().homeLocation
+	work := parameters().workLocation
 
-	createAndSaveGraph(c, startTime, endTime, "To Work", "to-work.png", home, work)
-	createAndSaveGraph(c, startTime, endTime, "From Work", "from-work.png", work, home)
+	if toWork {
+		createAndSaveGraph(c, startTime, endTime, "To Work", toWorkFilename, home, work)
+	} else {
+		createAndSaveGraph(c, startTime, endTime, "From Work", fromWorkFilename, work, home)
+	}
 }
 
 func createAndSaveGraph(c *maps.Client, startTime time.Time, endTime time.Time, title string, fileName string, startLoc string, endLoc string) {
