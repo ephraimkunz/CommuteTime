@@ -13,3 +13,6 @@ If you don't want to set up a whole Go environment on the system where this cron
 2. Cross-compile for the target machine on another machine. For Raspberry Pi, run `env GOOS=linux GOARCH=arm GOARM=5 go build
 `.
 3. Scp this executable and the scripts to the target machine. You should be able to run the scripts there and everything should work.
+
+## Other stuff
+* You should use [Cronhub](https://cronhub.io) for monitoring your cron jobs.
