@@ -16,10 +16,10 @@ import (
 func generateGraph(toWork bool) {
 	c, err := maps.NewClient(maps.WithAPIKey(parameters().apiKey))
 	if err != nil {
-		log.Fatal("Fatal error: %s", err)
+		log.Fatal("Fatal error: ", err)
 	}
 
-	startTime := roundToNearestHalfHourInFuture()
+	startTime := roundToNearestHalfHourInFuture(time.Now())
 	endTime := startTime.Add(6 * time.Hour)
 	home := parameters().homeLocation
 	work := parameters().workLocation
@@ -59,7 +59,7 @@ func createAndSaveGraph(c *maps.Client, startTime time.Time, endTime time.Time, 
 				matrix, err := c.DistanceMatrix(context.Background(), r)
 
 				if err != nil {
-					log.Fatal("Fatal error: %s", err)
+					log.Fatal("Fatal error: ", err)
 				}
 
 				switch loop {

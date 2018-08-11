@@ -12,20 +12,16 @@ func formatTime(v interface{}) string {
 	if typed, isTyped := v.(time.Time); isTyped {
 		return typed.Format(dateFormat)
 	}
-	if typed, isTyped := v.(int64); isTyped {
-		return time.Unix(0, typed).Format(dateFormat)
-	}
 	if typed, isTyped := v.(float64); isTyped {
 		return time.Unix(0, int64(typed)).Format(dateFormat)
 	}
 	return ""
 }
 
-func roundToNearestHalfHourInFuture() time.Time {
-	now := time.Now()
+func roundToNearestHalfHourInFuture(now time.Time) time.Time {
 	var rounded time.Time
 
-	if now.Minute() <= 30 {
+	if now.Minute() < 30 {
 		// Round to 30 in future
 		rounded = time.Date(now.Year(), now.Month(), now.Day(), now.Hour(), 30, 0, 0, now.Location())
 	} else {
