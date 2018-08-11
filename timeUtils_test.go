@@ -57,26 +57,6 @@ func Test_roundToNearestHalfHourInFuture(t *testing.T) {
 	}
 }
 
-func Test_nextTimeInGraph(t *testing.T) {
-	type args struct {
-		current time.Time
-	}
-	tests := []struct {
-		name string
-		args args
-		want time.Time
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := nextTimeInGraph(tt.args.current); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("nextTimeInGraph() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
 func Test_timeOfDay(t *testing.T) {
 	now := time.Now()
 	noon := time.Date(now.Year(), now.Month(), now.Day(), 12, 0, 0, 0, now.Location())
