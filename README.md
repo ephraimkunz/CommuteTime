@@ -1,5 +1,7 @@
 # CommuteTime
-Find out when the optimal time is to start your commute, taking into account traffic
+![Example graph](https://github.com/ephraimkunz/CommuteTime/blob/master/from-work.png "Example of generate graph")
+
+Find out when the optimal time is to start your commute, taking into account traffic. Get reports emailed to you in the morning and in the afternoon.
 
 ## Description
 This is a simple, command-line Go program that generates graphs of possible commute times and emails them to you. Which graphs to generate and where to email them are configured with environment variables in `commute.sh`. This is called by `towork.sh` or `fromwork.sh`. Cron should be configured to call these in the morning or the night. Make these scripts executable with `chmod +x <scriptname>`.
