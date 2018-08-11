@@ -1,4 +1,4 @@
-# CommuteTime
+# CommuteTime [![Build Status](https://travis-ci.org/ephraimkunz/CommuteTime.svg?branch=master)](https://travis-ci.org/ephraimkunz/CommuteTime)
 ![Example graph](https://github.com/ephraimkunz/CommuteTime/blob/master/from-work.png "Example of generate graph")
 
 Find out when the optimal time is to start your commute, taking into account traffic. Get reports emailed to you in the morning and in the afternoon.
