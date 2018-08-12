@@ -5,5 +5,5 @@ export APIKEY=
 export HOME_LOCATION=
 export WORK_LOCATION=
 
-go build
+/usr/local/go/bin/go build
 ./commute-matrix
