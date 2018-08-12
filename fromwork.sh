@@ -1,2 +1,3 @@
 export TOWORK=false
-sh commute.sh
+cd ~/Desktop/commute-matrix  
+sh ./commute.sh

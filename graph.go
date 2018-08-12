@@ -40,7 +40,7 @@ func createAndSaveGraph(c *maps.Client, startTime time.Time, endTime time.Time, 
 	worstTravelTimes := []float64{}
 	bestTravelTimes := []float64{}
 
-	for currentTime.Before(endTime) {
+	for !currentTime.After(endTime) { // Before or equal to
 		var wg sync.WaitGroup
 		timestamps = append(timestamps, currentTime)
 		wg.Add(len(trafficModels))
